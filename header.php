@@ -8,7 +8,9 @@
 <body <?php body_class(); ?>>
 <header class="site-header" id="siteHeader">
   <div class="header-inner">
-    <a href="<?php echo esc_url(home_url('/')); ?>" class="logo">Mario Vera</a>
+    <a href="<?php echo esc_url(home_url('/')); ?>" class="logo">
+      <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/logo.png" alt="Mario Vera">
+    </a>
     <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
     <nav class="site-nav" id="siteNav">
       <?php

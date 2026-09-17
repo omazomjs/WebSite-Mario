@@ -37,13 +37,15 @@ a { color: var(--fg); text-decoration: none; }
 .nav-toggle { display: none; background: none; border: none; color: var(--fg); font-size: 1.6rem; cursor: pointer; }
 
 /* ===== HERO ===== */
-.hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 40px; background: var(--bg); position: relative; overflow: hidden; }
-.hero::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 80%, rgba(255,255,255,.04) 0%, transparent 60%); pointer-events: none; }
-.hero-inner { max-width: 900px; }
-.hero h1 { font-family: var(--font-serif); font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 400; line-height: 1.1; margin-bottom: 24px; }
-.hero p { font-family: var(--font-sans); font-size: 1.1rem; color: var(--muted); max-width: 520px; margin: 0 auto 40px; }
-.btn { display: inline-block; padding: 14px 40px; border: 1px solid var(--border); font-family: var(--font-sans); font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; color: var(--fg); transition: background .3s, color .3s, border-color .3s; }
-.btn:hover { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 40px; position: relative; overflow: hidden; background: var(--bg); }
+.hero-img { width: 100%; max-width: 900px; border-radius: 4px; margin-bottom: 40px; object-fit: cover; aspect-ratio: 16/9; }
+.hero h1 { font-family: var(--font-serif); font-size: clamp(2.4rem, 5vw, 4.2rem); font-weight: 400; line-height: 1.1; margin-bottom: 20px; }
+/* ===== ABOUT ===== */
+.about { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.about-img { width: 100%; border-radius: 4px; }
+.firma { width: 100%; max-width: 320px; margin: 24px 0; opacity: .85; }
+.about-text h2 { margin-bottom: 24px; }
+.about-text p { color: var(--muted); margin-bottom: 16px; }
 
 /* ===== SECTIONS ===== */
 section { padding: 100px 40px; max-width: 1400px; margin: 0 auto; }
