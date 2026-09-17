@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ginevra — Artista Portfolio · Mario Vera</title>
+<title>Mario Vera — Artist Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -11,55 +11,96 @@
 body{background:var(--bg);color:var(--fg);font-family:var(--font-sans);line-height:1.7;-webkit-font-smoothing:antialiased}
 img{max-width:100%;height:auto;display:block}
 a{color:var(--fg);text-decoration:none}
-header{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:24px 60px;background:transparent;display:flex;justify-content:space-between;align-items:center}
+
+/* ===== ANIMACIONES ===== */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.animate{opacity:0;animation-fill-mode:forwards}
+.fadeInUp{animation:fadeInUp .8s ease forwards}
+.fadeIn{animation:fadeIn 1s ease forwards}
+.delay-1{animation-delay:.2s}
+.delay-2{animation-delay:.4s}
+.delay-3{animation-delay:.6s}
+
+/* ===== PRELOADER ===== */
+#preloader{position:fixed;inset:0;z-index:9999;background:#fff;display:flex;align-items:center;justify-content:center;transition:opacity .6s,visibility .6s}
+#preloader.hide{opacity:0;visibility:hidden}
+#preloader .spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ===== HEADER ===== */
+header{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:24px 60px;background:transparent;display:flex;justify-content:space-between;align-items:center;transition:all .4s}
 header.scrolled{background:#fff;box-shadow:0 1px 20px rgba(0,0,0,.08);padding:16px 60px}
 .logo{font-family:var(--font-serif);font-size:1.6rem;font-weight:700;letter-spacing:.02em}
-.logo img{height:36px}
+.logo img{height:36px;vertical-align:middle}
 nav{display:flex;gap:36px;align-items:center}
-nav a{font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;transition:.3s}
+nav a{font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;transition:color .3s}
 nav a:hover{color:var(--fg)}
 nav .drop{position:relative}
 nav .drop-content{display:none;position:absolute;top:100%;left:0;background:#fff;border:1px solid var(--border);min-width:180px;box-shadow:0 8px 30px rgba(0,0,0,.08);padding:8px 0;z-index:1001}
 nav .drop-content a{display:block;padding:10px 20px;color:var(--muted);font-size:.82rem}
 nav .drop-content a:hover{color:var(--fg);background:var(--card)}
 nav .drop:hover .drop-content{display:block}
+.nav-toggle{display:none;background:none;border:none;color:var(--fg);font-size:1.6rem;cursor:pointer}
+
+/* ===== HERO ===== */
 .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 60px;position:relative;overflow:hidden;background:var(--card)}
-.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.12;z-index:0}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.1;z-index:0}
 .hero-content{position:relative;z-index:1;max-width:700px}
 .hero h1{font-family:var(--font-serif);font-size:clamp(2.2rem,5vw,4rem);font-weight:400;line-height:1.1;margin-bottom:16px}
 .hero .sub{font-size:1rem;color:var(--muted);margin-bottom:36px;letter-spacing:.05em}
+
+/* ===== BUTTON ===== */
 .btn{display:inline-block;padding:14px 40px;border:1px solid var(--border);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fg);transition:all .3s;cursor:pointer;font-weight:500}
 .btn:hover{background:var(--fg);color:#fff;border-color:var(--fg)}
+
+/* ===== SECCIONES ===== */
 section{padding:100px 60px;max-width:1400px;margin:0 auto}
 section h2{font-family:var(--font-serif);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:400;margin-bottom:12px}
 .section-intro{color:var(--muted);max-width:600px;margin-bottom:56px;font-size:.95rem}
+
+/* ===== GALERÍA ===== */
 .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.gallery-item{border-radius:8px;overflow:hidden;background:var(--card);position:relative;cursor:pointer}
+.gallery-item{border-radius:8px;overflow:hidden;background:var(--card);position:relative;cursor:pointer;transition:transform .3s}
+.gallery-item:hover{transform:translateY(-4px)}
 .gallery-item img{width:100%;transition:transform .6s,opacity .6s;opacity:.9}
 .gallery-item:hover img{transform:scale(1.05);opacity:1}
 .gallery-item .overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55) 0%,transparent 50%);opacity:0;transition:opacity .4s;display:flex;align-items:flex-end;padding:24px}
 .gallery-item:hover .overlay{opacity:1}
 .gallery-item .overlay span{color:#fff;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+.categories{display:flex;gap:12px;margin-bottom:48px;flex-wrap:wrap}
+.cat-btn{padding:10px 24px;border:1px solid var(--border);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;background:#fff;color:var(--muted);cursor:pointer;transition:all .3s;font-weight:500}
+.cat-btn:hover,.cat-btn.active{background:var(--fg);color:#fff;border-color:var(--fg)}
+
+/* ===== ABOUT ===== */
 .about{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
 .about-img{width:100%;border-radius:8px}
 .about-text h2{margin-bottom:20px}
 .about-text p{color:var(--muted);margin-bottom:16px;font-size:.95rem}
-.categories{display:flex;gap:12px;margin-bottom:48px;flex-wrap:wrap}
-.cat-btn{padding:10px 24px;border:1px solid var(--border);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;background:#fff;color:var(--muted);cursor:pointer;transition:all .3s;font-weight:500}
-.cat-btn:hover,.cat-btn.active{background:var(--fg);color:#fff;border-color:var(--fg)}
+
+/* ===== CONTACTO ===== */
 .form{max-width:520px}
 .form label{display:block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;font-weight:500}
 .form input,.form textarea{width:100%;padding:14px 18px;margin-bottom:20px;background:var(--card);border:1px solid var(--border);color:var(--fg);font-family:var(--font-sans);font-size:.92rem;outline:none;transition:border-color .3s}
 .form input:focus,.form textarea:focus{border-color:var(--accent)}
 .form textarea{min-height:140px;resize:vertical}
+
+/* ===== FOOTER ===== */
 footer{padding:50px 60px;border-top:1px solid var(--border);background:#fafafa}
 .footer-inner{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:.8rem}
 .footer-inner nav{display:flex;gap:24px}
+.footer-inner a{color:var(--muted);transition:color .3s}
+.footer-inner a:hover{color:var(--fg)}
+
 @media(max-width:1024px){.about{grid-template-columns:1fr}.gallery-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:768px){header{padding:16px 24px}header.scrolled{padding:14px 24px}section{padding:60px 24px}.gallery-grid{grid-template-columns:1fr}.footer-inner{flex-direction:column;gap:16px;text-align:center}}
+@media(max-width:768px){header{padding:16px 24px}header.scrolled{padding:14px 24px}section{padding:60px 24px}.gallery-grid{grid-template-columns:1fr}.footer-inner{flex-direction:column;gap:16px;text-align:center}nav .drop-content{position:fixed;top:60px;left:0;width:100%;background:#fff;padding:20px}.nav-toggle{display:block}}
 </style>
 </head>
 <body>
+
+<!-- PRELOADER ANIMADO -->
+<div id="preloader"><div class="spinner"></div></div>
+
 <header id="hdr">
   <div class="logo"><img src="assets/logo.png" alt="Mario Vera"></div>
   <nav>
@@ -75,63 +116,67 @@ footer{padding:50px 60px;border-top:1px solid var(--border);background:#fafafa}
     <a href="#">Contacto</a>
   </nav>
 </header>
+
 <section class="hero">
   <img class="hero-img" src="https://marioverarte.com/wp-content/uploads/2025/09/portada-web-1-1-scaled.png" alt="Portada">
   <div class="hero-content">
-    <h1>Mario Vera</h1>
-    <p class="sub">Artista Visual · 1976 · Elda (Alicante)</p>
-    <a href="#" class="btn">Ver portafolio</a>
+    <h1 class="animate fadeInUp delay-1">Mario Vera</h1>
+    <p class="sub animate fadeInUp delay-2">Artista Visual · 1976 · Elda (Alicante)</p>
+    <a href="#" class="btn animate fadeInUp delay-3">Ver portafolio</a>
   </div>
 </section>
+
 <section>
-  <h2>Portafolio</h2>
-  <p class="section-intro">Selección de obras de la colección de Mario Vera — pintura, escultura y restauración.</p>
-  <div class="categories">
+  <h2 class="animate fadeInUp delay-1">Portafolio</h2>
+  <p class="section-intro animate fadeInUp delay-2">Selección de obras de la colección de Mario Vera — pintura, escultura y restauración.</p>
+  <div class="categories animate fadeInUp delay-2">
     <button class="cat-btn active">Todo</button>
     <button class="cat-btn">Tentación</button>
     <button class="cat-btn">Retratos</button>
     <button class="cat-btn">Escultura</button>
   </div>
   <div class="gallery-grid">
-    <div class="gallery-item"><img src="https://marioverarte.com/wp-content/uploads/2025/11/web_tablet-nombre-jpg.jpg" alt=""><div class="overlay"><span>Tentación</span></div></div>
-    <div class="gallery-item"><img src="https://picsum.photos/seed/p1/600/600" alt=""><div class="overlay"><span>Pintura</span></div></div>
-    <div class="gallery-item"><img src="https://picsum.photos/seed/p2/600/700" alt=""><div class="overlay"><span>Tentación</span></div></div>
-    <div class="gallery-item"><img src="https://picsum.photos/seed/p3/600/500" alt=""><div class="overlay"><span>Retrato</span></div></div>
-    <div class="gallery-item"><img src="https://picsum.photos/seed/p4/600/800" alt=""><div class="overlay"><span>Escultura</span></div></div>
-    <div class="gallery-item"><img src="https://picsum.photos/seed/p5/600/600" alt=""><div class="overlay"><span>Pintura</span></div></div>
-    <div class="gallery-item"><img src="https://picsum.photos/seed/p6/600/700" alt=""><div class="overlay"><span>Tentación</span></div></div>
-    <div class="gallery-item"><img src="https://picsum.photos/seed/p7/600/500" alt=""><div class="overlay"><span>Retrato</span></div></div>
-    <div class="gallery-item"><img src="https://picsum.photos/seed/p8/600/600" alt=""><div class="overlay"><span>Escultura</span></div></div>
+    <div class="gallery-item animate fadeInUp delay-1"><img src="https://marioverarte.com/wp-content/uploads/2025/11/web_tablet-nombre-jpg.jpg" alt=""><div class="overlay"><span>Tentación</span></div></div>
+    <div class="gallery-item animate fadeInUp delay-2"><img src="https://picsum.photos/seed/p1/600/600" alt=""><div class="overlay"><span>Pintura</span></div></div>
+    <div class="gallery-item animate fadeInUp delay-3"><img src="https://picsum.photos/seed/p2/600/700" alt=""><div class="overlay"><span>Tentación</span></div></div>
+    <div class="gallery-item animate fadeInUp delay-1"><img src="https://picsum.photos/seed/p3/600/500" alt=""><div class="overlay"><span>Retrato</span></div></div>
+    <div class="gallery-item animate fadeInUp delay-2"><img src="https://picsum.photos/seed/p4/600/800" alt=""><div class="overlay"><span>Escultura</span></div></div>
+    <div class="gallery-item animate fadeInUp delay-3"><img src="https://picsum.photos/seed/p5/600/600" alt=""><div class="overlay"><span>Pintura</span></div></div>
+    <div class="gallery-item animate fadeInUp delay-1"><img src="https://picsum.photos/seed/p6/600/700" alt=""><div class="overlay"><span>Tentación</span></div></div>
+    <div class="gallery-item animate fadeInUp delay-2"><img src="https://picsum.photos/seed/p7/600/500" alt=""><div class="overlay"><span>Retrato</span></div></div>
+    <div class="gallery-item animate fadeInUp delay-3"><img src="https://picsum.photos/seed/p8/600/600" alt=""><div class="overlay"><span>Escultura</span></div></div>
   </div>
 </section>
+
 <section class="about">
-  <div>
-    <img class="about-img" src="assets/tablet.jpg" alt="Mario Vera">
-  </div>
-  <div class="about-text">
+  <div class="animate fadeInUp delay-1"><img class="about-img" src="assets/tablet.jpg" alt="Mario Vera"></div>
+  <div class="animate fadeInUp delay-2">
     <h2>Sobre mí</h2>
     <p>Artista Visual que crea su obra a partir de la unión de sus dos mundos: la precisión analítica de la optometría y la necesidad vital de crear.</p>
-    <p>Su ejercicio profesional se ha desarrollado en el campo de la salud como Optometrista. Es en el acto de crear donde encuentra el sentido más profundo de su vida. La materialización de ideas, ya sea pintando, esculpiendo o restaurando, es su motor esencial.</p>
-    <p>Se define por una conexión íntima con los materiales: la fascinación por sentir la materia, ver cómo se transforma bajo el control de sus manos, y la experiencia de ver una forma surgir de su mente a la realidad física.</p>
+    <p>Su ejercicio profesional se ha desarrollado en el campo de la salud como Optometrista. Es en el acto de crear donde encuentra el sentido más profundo de su vida.</p>
   </div>
 </section>
+
 <section>
-  <h2>Contacto</h2>
-  <div class="form">
+  <h2 class="animate fadeInUp delay-1">Contacto</h2>
+  <div class="form animate fadeInUp delay-2">
     <label>Nombre</label><input type="text" placeholder="Tu nombre">
     <label>Email</label><input type="email" placeholder="tu@mail.com">
     <label>Mensaje</label><textarea placeholder="Escribe aquí..."></textarea>
-    <button class="btn">Enviar</button>
+    <button class="btn animate fadeInUp delay-3">Enviar</button>
   </div>
 </section>
+
 <footer>
   <div class="footer-inner">
     <p>Mario Vera © 2026</p>
     <nav><a href="#">Cookies</a><a href="#">Privacidad</a><a href="#">Términos</a></nav>
   </div>
 </footer>
+
 <script>
 window.addEventListener('scroll',()=>{document.getElementById('hdr').classList.toggle('scrolled',window.scrollY>60)})
+window.addEventListener('load',()=>{setTimeout(()=>{document.getElementById('preloader').classList.add('hide')},800)})
 </script>
 </body>
 </html>
