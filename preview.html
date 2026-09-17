@@ -11,17 +11,23 @@
 body{background:var(--bg);color:var(--fg);font-family:'Inter',sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
 img{max-width:100%;height:auto;display:block}
 a{color:var(--fg);text-decoration:none}
-header{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:24px 40px;background:transparent;display:flex;justify-content:space-between;align-items:center}
-header.scrolled{background:rgba(10,10,10,.92);backdrop-filter:blur(12px);padding:14px 40px}
-.logo{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:400;letter-spacing:.08em}
-.logo img{height:36px;vertical-align:middle}
-nav{display:flex;gap:32px}
-nav a{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);transition:.3s}
+header{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:20px 40px;background:transparent;display:flex;justify-content:space-between;align-items:center}
+header.scrolled{background:rgba(10,10,10,.94);backdrop-filter:blur(12px);padding:14px 40px}
+.logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:400;letter-spacing:.06em}
+.logo img{height:34px;vertical-align:middle}
+nav{display:flex;gap:28px;align-items:center}
+nav a{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);transition:.3s}
 nav a:hover{color:var(--fg)}
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 40px;position:relative;overflow:hidden;background:var(--bg)}
-.hero-img{width:100%;max-width:900px;border-radius:4px;margin-bottom:40px;object-fit:cover;aspect-ratio:16/9}
-.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,4.2rem);font-weight:400;line-height:1.1;margin-bottom:20px}
-.hero p{color:var(--muted);max-width:560px;margin:0 auto 40px;font-size:1.05rem}
+nav .drop{position:relative}
+nav .drop-content{display:none;position:absolute;top:100%;left:0;background:var(--card);border:1px solid var(--border);min-width:160px;padding:8px 0}
+nav .drop-content a{display:block;padding:10px 20px;color:var(--muted);font-size:.8rem}
+nav .drop-content a:hover{color:var(--fg);background:rgba(255,255,255,.04)}
+nav .drop:hover .drop-content{display:block}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 40px;position:relative;overflow:hidden;background:var(--bg)}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35;z-index:0}
+.hero-content{position:relative;z-index:1;max-width:700px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,4rem);font-weight:400;line-height:1.1;margin-bottom:12px;color:#fff}
+.hero .sub{font-family:'Playfair Display',serif;font-size:clamp(1rem,1.8vw,1.3rem);font-weight:400;color:var(--muted);margin-bottom:32px}
 .btn{display:inline-block;padding:14px 44px;border:1px solid var(--border);font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fg);transition:.3s;cursor:pointer}
 .btn:hover{background:var(--fg);color:var(--bg);border-color:var(--fg)}
 section{padding:100px 40px;max-width:1400px;margin:0 auto}
@@ -31,9 +37,11 @@ section h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6re
 .gallery-item{break-inside:avoid;margin-bottom:6px;position:relative;overflow:hidden;cursor:pointer}
 .gallery-item img{width:100%;transition:transform .6s,opacity .6s;opacity:.85}
 .gallery-item:hover img{transform:scale(1.03);opacity:1}
+.gallery-cat{margin-bottom:64px}
+.gallery-cat h3{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:400;margin-bottom:24px;color:var(--fg)}
 .about{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
 .about-img{width:100%;border-radius:4px}
-.firma{width:100%;max-width:320px;margin:24px 0;opacity:.85}
+.firma{width:100%;max-width:300px;margin:24px 0;opacity:.8}
 .about-text h2{margin-bottom:24px}
 .about-text p{color:var(--muted);margin-bottom:16px}
 .form{max-width:560px}
@@ -44,35 +52,33 @@ section h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6re
 footer{padding:40px;border-top:1px solid var(--border)}
 .footer-inner{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:.8rem}
 .footer-inner nav{display:flex;gap:24px}
-@media(max-width:1024px){.about{grid-template-columns:1fr}.gallery{columns:2}}
-@media(max-width:768px){header{padding:16px 24px}section{padding:60px 24px}.about{grid-template-columns:1fr;gap:40px}}
+@media(max-width:1024px){.about{grid-template-columns:1fr}.gallery{columns:2}header{padding:16px 24px}section{padding:60px 24px}}
+@media(max-width:768px){nav .drop-content{position:fixed;top:60px;left:0;width:100%;background:rgba(10,10,10,.97);padding:20px}}
 @media(max-width:480px){.gallery{columns:1}}
 </style>
 </head>
 <body>
 <header id="hdr">
-  <div class="logo">
-    <img src="assets/logo.png" alt="Mario Vera">
-  </div>
-  <nav><a href="#">Inicio</a><a href="#">Galería</a><a href="#">Sobre mí</a><a href="#">Contacto</a></nav>
+  <div class="logo"><img src="assets/logo.png" alt="Mario Vera"></div>
+  <nav>
+    <a href="#">Inicio</a>
+    <div class="drop">
+      <a href="#">Galería</a>
+      <div class="drop-content">
+        <a href="#">Tentación</a>
+        <a href="#">Retratos</a>
+      </div>
+    </div>
+    <a href="#">Sobre mí</a>
+    <a href="#">Contacto</a>
+  </nav>
 </header>
 <section class="hero">
   <img class="hero-img" src="https://marioverarte.com/wp-content/uploads/2025/09/portada-web-1-1-scaled.png" alt="Portada">
-  <h1>Mario Vera</h1>
-  <p>Artista Visual. La precisión analítica de la optometría y la necesidad vital de crear.</p>
-  <a href="#" class="btn">Ver galería</a>
-</section>
-<section>
-  <h2>Galería</h2>
-  <div class="gallery">
-    <a href="#" class="gallery-item"><img src="https://marioverarte.com/wp-content/uploads/2025/09/portada-web-1-1-scaled.png" alt=""></a>
-    <a href="#" class="gallery-item"><img src="https://picsum.photos/seed/m1/600/800" alt=""></a>
-    <a href="#" class="gallery-item"><img src="https://picsum.photos/seed/m2/600/600" alt=""></a>
-    <a href="#" class="gallery-item"><img src="https://picsum.photos/seed/m3/600/900" alt=""></a>
-    <a href="#" class="gallery-item"><img src="https://marioverarte.com/wp-content/uploads/2025/11/web_tablet-nombre-jpg.jpg" alt=""></a>
-    <a href="#" class="gallery-item"><img src="https://picsum.photos/seed/m4/600/700" alt=""></a>
-    <a href="#" class="gallery-item"><img src="https://picsum.photos/seed/m5/600/500" alt=""></a>
-    <a href="#" class="gallery-item"><img src="https://picsum.photos/seed/m6/600/800" alt=""></a>
+  <div class="hero-content">
+    <h1>Mario Vera</h1>
+    <p class="sub">1976 (Elda, Alicante)</p>
+    <a href="#" class="btn">Ver galería</a>
   </div>
 </section>
 <section class="about">
@@ -82,9 +88,30 @@ footer{padding:40px;border-top:1px solid var(--border)}
   </div>
   <div class="about-text">
     <h2>Sobre mí</h2>
-    <p>Mario Vera (Elda, Alicante, 1976). Artista Visual que crea su obra a partir de la unión de sus dos mundos: la precisión analítica de la optometría y la necesidad vital de crear.</p>
-    <p>Su ejercicio profesional se ha desarrollado en el campo de la salud como Optometrista, profesión que adora, ya que gracias a ella ha podido conocer y ayudar a personas increíbles. Es en el acto de crear donde encuentra el sentido más profundo de su vida.</p>
-    <p>La materialización de ideas, ya sea pintando, esculpiendo o restaurando, es su motor esencial.</p>
+    <p>Artista Visual que crea su obra a partir de la unión de sus dos mundos: la precisión analítica de la optometría y la necesidad vital de crear.</p>
+    <p>Su ejercicio profesional se ha desarrollado en el campo de la salud como Optometrista, profesión que adora, ya que gracias a ella ha podido conocer y ayudar a personas increíbles. Es en el acto de crear donde encuentra el sentido más profundo y la mayor plenitud de su vida.</p>
+    <p>La materialización de ideas, ya sea pintando, esculpiendo o restaurando, es su motor esencial. Se define por una conexión íntima con los materiales: la fascinación por sentir la materia, ver cómo se transforma bajo el control de sus manos, y la experiencia de ver una forma surgir de su mente a la realidad física.</p>
+    <p>Su portafolio es el testimonio de una vocación irrefrenable, pasión y dedicación personal.</p>
+  </div>
+</section>
+<section>
+  <div class="gallery-cat">
+    <h3>Tentación</h3>
+    <div class="gallery">
+      <a href="#" class="gallery-item"><img src="https://marioverarte.com/wp-content/uploads/2025/11/web_tablet-nombre-jpg.jpg" alt=""></a>
+      <a href="#" class="gallery-item"><img src="https://picsum.photos/seed/t1/600/800" alt=""></a>
+      <a href="#" class="gallery-item"><img src="https://picsum.photos/seed/t2/600/600" alt=""></a>
+      <a href="#" class="gallery-item"><img src="https://picsum.photos/seed/t3/600/700" alt=""></a>
+    </div>
+  </div>
+  <div class="gallery-cat">
+    <h3>Retratos</h3>
+    <div class="gallery">
+      <a href="#" class="gallery-item"><img src="https://picsum.photos/seed/r1/600/900" alt=""></a>
+      <a href="#" class="gallery-item"><img src="https://picsum.photos/seed/r2/600/500" alt=""></a>
+      <a href="#" class="gallery-item"><img src="https://picsum.photos/seed/r3/600/800" alt=""></a>
+      <a href="#" class="gallery-item"><img src="https://picsum.photos/seed/r4/600/600" alt=""></a>
+    </div>
   </div>
 </section>
 <section>

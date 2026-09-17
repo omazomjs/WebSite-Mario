@@ -18,7 +18,8 @@
         'theme_location' => 'primary',
         'container'      => false,
         'items_wrap'     => '<ul id="%1$s" class="menu">%3$s</ul>',
-        'menu_class'     => 'menu'
+        'menu_class'     => 'menu',
+        'depth'          => 2
       ]);
       ?>
     </nav>
