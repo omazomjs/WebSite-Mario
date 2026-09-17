@@ -1,0 +1,90 @@
+/*
+Theme Name: Tienda Mario
+Theme URI: https://marioverarte.com/
+Description: Diseño tipo galería de arte para Mario Vera. Basado en Divi.
+Author: NEO
+Author URI:
+Template: Divi
+Version: 1.0.0
+Text Domain: tienda-mario
+*/
+
+:root {
+  --bg: #0a0a0a;
+  --bg-light: #141414;
+  --fg: #fafafa;
+  --muted: #999;
+  --accent: #ccc;
+  --card: #1a1a1a;
+  --border: #2a2a2a;
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-sans); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--fg); text-decoration: none; }
+
+/* ===== HEADER ===== */
+.site-header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background: transparent; padding: 24px 0; transition: background .4s, padding .4s; }
+.site-header.scrolled { background: rgba(10,10,10,.92); backdrop-filter: blur(12px); padding: 14px 0; }
+.header-inner { max-width: 1400px; margin: 0 auto; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; }
+.logo { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 700; letter-spacing: .05em; }
+.site-nav { display: flex; gap: 32px; }
+.site-nav a { font-family: var(--font-sans); font-size: .9rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); transition: color .3s; }
+.site-nav a:hover, .site-nav a:focus { color: var(--fg); }
+.nav-toggle { display: none; background: none; border: none; color: var(--fg); font-size: 1.6rem; cursor: pointer; }
+
+/* ===== HERO ===== */
+.hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 40px; background: var(--bg); position: relative; overflow: hidden; }
+.hero::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 80%, rgba(255,255,255,.04) 0%, transparent 60%); pointer-events: none; }
+.hero-inner { max-width: 900px; }
+.hero h1 { font-family: var(--font-serif); font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 400; line-height: 1.1; margin-bottom: 24px; }
+.hero p { font-family: var(--font-sans); font-size: 1.1rem; color: var(--muted); max-width: 520px; margin: 0 auto 40px; }
+.btn { display: inline-block; padding: 14px 40px; border: 1px solid var(--border); font-family: var(--font-sans); font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; color: var(--fg); transition: background .3s, color .3s, border-color .3s; }
+.btn:hover { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+
+/* ===== SECTIONS ===== */
+section { padding: 100px 40px; max-width: 1400px; margin: 0 auto; }
+section h2 { font-family: var(--font-serif); font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 400; margin-bottom: 48px; }
+.section-intro { color: var(--muted); max-width: 640px; margin-bottom: 64px; }
+
+/* ===== GALERÍA MASONRY ===== */
+.gallery { columns: 3; column-gap: 6px; }
+.gallery-item { break-inside: avoid; margin-bottom: 6px; position: relative; cursor: pointer; overflow: hidden; }
+.gallery-item img { width: 100%; transition: transform .6s ease, opacity .6s ease; opacity: .85; }
+.gallery-item:hover img { transform: scale(1.03); opacity: 1; }
+.gallery-item::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,10,.55) 0%, transparent 55%); opacity: 0; transition: opacity .4s; }
+.gallery-item:hover::after { opacity: 1; }
+
+/* ===== SOBRE MÍ ===== */
+.about { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.about img { border-radius: 4px; }
+.about-text h2 { margin-bottom: 24px; }
+.about-text p { color: var(--muted); margin-bottom: 16px; }
+
+/* ===== CONTACTO ===== */
+.contact-form { max-width: 560px; }
+.contact-form label { display: block; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.contact-form input, .contact-form textarea { width: 100%; padding: 14px 18px; margin-bottom: 20px; background: var(--card); border: 1px solid var(--border); color: var(--fg); font-family: var(--font-sans); font-size: .95rem; outline: none; transition: border-color .3s; }
+.contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent); }
+.contact-form textarea { min-height: 140px; resize: vertical; }
+
+/* ===== FOOTER ===== */
+.site-footer { padding: 40px; border-top: 1px solid var(--border); }
+.footer-inner { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: .8rem; }
+.footer-inner nav { display: flex; gap: 24px; }
+.footer-inner a { color: var(--muted); transition: color .3s; }
+.footer-inner a:hover { color: var(--fg); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) { .gallery { columns: 2; } .about { grid-template-columns: 1fr; } }
+@media (max-width: 768px) {
+  .site-nav { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(10,10,10,.97); flex-direction: column; align-items: center; justify-content: center; gap: 36px; }
+  .site-nav.open { display: flex; }
+  .nav-toggle { display: block; }
+  .hero { padding: 0 24px; }
+  section { padding: 60px 24px; }
+  .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
+}
